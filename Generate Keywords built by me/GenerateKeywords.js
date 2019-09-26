@@ -1,12 +1,12 @@
-// I tried rake and was mising some keywords
-const rake = require('node-rake')
-// also I tried keyword-extractor and was mising some keywords
-var keyword_extractor = require("keyword-extractor");
-// also I tried retext and was miising some keywords
-var retext = require('retext')
-var pos = require('retext-pos')
-var keywords = require('retext-keywords')
-var toString = require('nlcst-to-string')
+// // I tried rake and was mising some keywords
+// const rake = require('node-rake')
+// // also I tried keyword-extractor and was mising some keywords
+// var keyword_extractor = require("keyword-extractor");
+// // also I tried retext and was miising some keywords
+// var retext = require('retext')
+// var pos = require('retext-pos')
+// var keywords = require('retext-keywords')
+// var toString = require('nlcst-to-string')
 
 
 // I took this from keyword-extractor source code
@@ -617,7 +617,7 @@ function DevidePhrase(Phrase, Max) {
                     chunkPhrase.push(PhrArr[k])
                 }
 
-                result.push(chunkPhrase.join(" ").toLowerCase())
+                result.push(chunkPhrase.join(" ").toLowerCase().trim())
             }
         }
     }
@@ -663,25 +663,28 @@ var GenerateKeywordsReText = async (txt) => {
 
     }
 
-    Gen = [...new Set(Gen)]
+    Gen = CalculateOccurencies(Gen)
+    
+    console.log("CalculateOccurencies")
+  
 
 
-    console.log(Gen)
+    removeNumbersLowerThan(1,Gen)
+
+   
+
     var all = []
 
-    for (var idx = 0; idx < Gen.length; idx++) {
+    for (var idx = 0; idx < Object.keys(Gen).length; idx++) {
 
 
-
-        var kwReg = new RegExp(Gen[idx], 'gi');
-        var count = (txtToLookIn.match(kwReg) || []).length;
-        if (count >= 2) {
-            console.log(kwReg + " was Found " +count)
+        var kwReg=Object.keys(Gen)[idx]
+        var count =  Gen[Object.keys(Gen)[idx]];
+        
             for (var i = 0; i < count; i++) {
-                all.push(Gen[idx].toLowerCase())
+                all.push(kwReg.toLowerCase())
             }
-
-        }
+        
 
     }
 
@@ -689,9 +692,16 @@ var GenerateKeywordsReText = async (txt) => {
     return all
 }
 
-
-
-
+function CalculateOccurencies(arr) {
+    return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
+}
+function removeNumbersLowerThan(num, obj) {
+    for (var property in obj) {
+        if (obj[property] <= num) {
+            delete obj[property];
+        }
+    }
+}
 
 // easy to use
 /*
