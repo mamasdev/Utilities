@@ -608,7 +608,7 @@ function DevidePhrase(Phrase, Max) {
 
 
 
-            if (PhrArr[i] != "" && stp.stopwords.findIndex(stpWrd => stpWrd == PhrArr[i]) == -1) {
+            if (PhrArr[i] != "" && stp.stopwords.findIndex(stpWrd => stpWrd == PhrArr[i].toLowerCase().trim()) == -1) {
 
 
                 var chunkPhrase = []
