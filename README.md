@@ -10,6 +10,11 @@ PromisifyQueries.js (I wrote this function to help me organize my code Node-MySQ
 SortArrayOfObjects.js (in my FrontEnd work, I have to deal with sorting tables a lot! so I wrote this piece of code to help me sort any table (written in VueJs v-for) based on a property)
 
 
+GenerateKeywords.js ( I tried many npm modules, but no luck.. data was not 100% accurate, I build my own)
+ easy to use
+
+var GenerateKeywords = require("./GenerateKeywords.js")
+GenerateKeywords("myMultiLineText")
 
 
 
