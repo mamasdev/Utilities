@@ -11,9 +11,11 @@ SortArrayOfObjects.js (in my FrontEnd work, I have to deal with sorting tables a
 
 
 GenerateKeywords.js ( I tried many npm modules, but no luck.. data was not 100% accurate, I build my own)
+
  easy to use
 
 var GenerateKeywords = require("./GenerateKeywords.js")
+
 GenerateKeywords("myMultiLineText")
 
 
